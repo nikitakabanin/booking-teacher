@@ -1,0 +1,17 @@
+a {
+  color: white;
+  color: inherit;
+  text-decoration: inherit;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+a:hover {
+  cursor: pointer;
+  color: white;
+  color: inherit;
+  text-decoration: inherit;
+  background-color: gray;
+  opacity: 0.1;
+  border-radius: 10px;
+  padding: 5px 10px;
+}

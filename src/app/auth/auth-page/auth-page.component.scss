@@ -1,0 +1,18 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+:host {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.button {
+  background-color: darkblue;
+}
+.switch-auth:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

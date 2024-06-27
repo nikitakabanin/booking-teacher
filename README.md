@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Do next
+
+Page for available booking from different mentors for every one create card with times and possible lesson types
+
+## Then
+
+Split feature for different roles: client - book and cancel, mentor - open and close bookings
