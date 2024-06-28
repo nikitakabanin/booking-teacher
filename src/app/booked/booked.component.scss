@@ -1,0 +1,22 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: whitesmoke;
+  height: 100vh;
+  align-items: start;
+}
+.white {
+  color: white;
+}
+mat-card {
+  margin-top: 20vh;
+  width: 60vw;
+  padding-left: 40px;
+  padding-bottom: 10px;
+}

@@ -1,0 +1,39 @@
+<div class="form" *ngIf="loginStatus === 'login'">
+  <h2>Вход</h2>
+  <mat-form-field
+    ><mat-label>Логин</mat-label
+    ><input matInput [(ngModel)]="userLoginData.login"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Логин</mat-label
+    ><input matInput [(ngModel)]="userLoginData.password"
+  /></mat-form-field>
+  <button mat-button class="button login-button" (click)="tryAuth()">
+    Войти
+  </button>
+  <h4>
+    <a (click)="loginStatus = 'registration'" class="switch-auth"
+      >Зарегистрироваться</a
+    >
+  </h4>
+</div>
+<div class="form" *ngIf="loginStatus === 'registration'">
+  <h2>Регистрация</h2>
+  <mat-form-field
+    ><mat-label>Имя</mat-label><input matInput [(ngModel)]="userRegData.name"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Логин</mat-label
+    ><input matInput [(ngModel)]="userRegData.login"
+  /></mat-form-field>
+  <mat-form-field
+    ><mat-label>Пароль</mat-label
+    ><input matInput [(ngModel)]="userRegData.password"
+  /></mat-form-field>
+  <button mat-button class="button login-button" (click)="tryAuth()">
+    Зарегистрироваться
+  </button>
+  <h4>
+    <a (click)="loginStatus = 'login'" class="switch-auth">Авторизоваться</a>
+  </h4>
+</div>
