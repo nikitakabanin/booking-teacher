@@ -30,10 +30,8 @@ export class AddComponent {
   availableOrders: Orders = { orders: [] };
   private readonly dialog = inject(MatDialog);
   private readonly http = inject(HttpService);
-  public readonly displayedColumns = [];
-  //  = Object.keys(
-  //   this.availableOrders.orders[0]
-  // );
+  public displayedColumns = ['time', 'client', 'subject', 'price', 'mentor'];
+
   private readonly bookingService = inject(BookingService);
   private readonly freeOrders$: Observable<Orders>;
   constructor() {
@@ -49,14 +47,7 @@ export class AddComponent {
         this.bookingService.addFreeOrders(element);
       });
   }
-  add() {
-    const order: Order = {
-      time: '2010-11-11T9:00',
-      client: 'New',
-      mentor: 'New',
-      subject: 'Spanish',
-      price: 799,
-    };
+  add(order: Order | undefined = undefined) {
     this.http.add(order).subscribe((v) => console.log(v));
   }
 }

@@ -27,25 +27,8 @@ import { Observable } from 'rxjs';
 })
 export class BookedComponent {
   bookingService = inject(BookingService);
-  bookedOrders: Orders = {
-    orders: [
-      {
-        time: '2012-04-21T18:00',
-        client: 'Drew',
-        mentor: 'Stan',
-        subject: 'English',
-        price: 123,
-      },
-      {
-        time: '2012-04-21T19',
-        client: 'Drew',
-        mentor: 'Stan',
-        subject: 'English',
-        price: 226,
-      },
-    ],
-  };
-  displayedColumns = Object.keys(this.bookedOrders.orders[0]);
+  bookedOrders: Orders = { orders: [] };
+  public displayedColumns = ['time', 'client', 'subject', 'price', 'mentor'];
   dialog = inject(MatDialog);
   private bookedOrders$: Observable<Orders>;
   constructor() {

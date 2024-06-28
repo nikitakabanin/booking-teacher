@@ -18,9 +18,6 @@ export class BookingService {
     return this.http.booked();
   }
   addFreeOrders(value: Order) {
-    // const initial = this.freeOrders.value;
-    // initial.orders = [...new Set([...initial.orders, ...value.orders])];
-    // this.freeOrders.next(initial);
     return this.http.add(value);
   }
   deleteFreeOrder(order: Order) {
@@ -29,16 +26,10 @@ export class BookingService {
   deleteBookedOrder(order: Order) {
     return this.http.deleteBookedOrder(order);
   }
-  addBookedOrders(value: Orders) {
-    const initial = this.bookedByClientOrders.value;
-    initial.orders = [...new Set([...initial.orders, ...value.orders])];
-    this.bookedByClientOrders.next(initial);
+  addBookedOrders(value: Order) {
+    return this.http.add(value);
   }
   deleteBookedOrders(value: Order) {
-    const initial = this.bookedByClientOrders.value;
-    initial.orders.filter(
-      (e) => e.time !== value.time || e.mentor !== value.mentor
-    );
-    this.bookedByClientOrders.next(initial);
+    return this.http.deleteBookedOrder(value);
   }
 }

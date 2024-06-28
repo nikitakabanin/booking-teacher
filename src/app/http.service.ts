@@ -31,8 +31,9 @@ export class HttpService {
   public booked() {
     return this.http.get<any>(`${this.baseUrl}/booked`);
   }
-  public add(order: Order) {
-    return this.http.post<any>(`${this.baseUrl}/add`, { order });
+  public add(order: Order | undefined) {
+    if (order) return this.http.post<any>(`${this.baseUrl}/add`, { order });
+    return of(undefined);
   }
   public deleteAvailableOrder(order: Order) {
     return this.http.post<any>(`${this.baseUrl}/deleteFree`, { order });
