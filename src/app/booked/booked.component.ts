@@ -51,24 +51,6 @@ export class BookedComponent {
   constructor() {
     this.bookedOrders$ = this.bookingService.getBookedOrders();
     this.bookedOrders$.subscribe((v) => (this.bookedOrders = v));
-    this.bookingService.addBookedOrders({
-      orders: [
-        {
-          time: '2012-04-21T18:00',
-          client: 'Drew',
-          mentor: 'Stan',
-          subject: 'English',
-          price: 123,
-        },
-        {
-          time: '2012-04-21T19',
-          client: 'Drew',
-          mentor: 'Stan',
-          subject: 'English',
-          price: 226,
-        },
-      ],
-    });
   }
   cancelBooking(element: Order) {
     this.dialog

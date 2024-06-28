@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { UserLoginRes, Order, UserRegReq, UserLoginReq } from './models';
 import { BehaviorSubject, Observable, Subject, catchError, of } from 'rxjs';
@@ -17,10 +17,7 @@ export class HttpService {
     return this.error$.asObservable();
   }
   public register(user: UserRegReq) {
-    return this.http.post<UserLoginRes>(
-      `http://${this.baseUrl}/register`,
-      user
-    );
+    return this.http.post<UserLoginRes>(`${this.baseUrl}/register`, user);
   }
   public login(user: UserLoginReq) {
     return this.http.post<UserLoginRes>(`${this.baseUrl}/login`, user);
@@ -36,6 +33,12 @@ export class HttpService {
   }
   public add(order: Order) {
     return this.http.post<any>(`${this.baseUrl}/add`, { order });
+  }
+  public deleteAvailableOrder(order: Order) {
+    return this.http.post<any>(`${this.baseUrl}/deleteFree`, { order });
+  }
+  public deleteBookedOrder(order: Order) {
+    return this.http.post<any>(`${this.baseUrl}/deleteBooked`, { order });
   }
   // public login(user: UserLogin): Observable<LoginResponse> {
   //   return of({ response: true, jwt: 'erwe', status: 'admin', name: 'Andrew' });

@@ -28,32 +28,14 @@ import { Observable } from 'rxjs';
 export class AvailableComponent {
   availableOrders: Orders = { orders: [] };
   private readonly dialog = inject(MatDialog);
-  public readonly displayedColumns = [];
-  //  = Object.keys(
-  //   this.availableOrders.orders[0]
-  // );
+  public displayedColumns = ['time', 'client', 'subject', 'price', 'mentor'];
+
   private readonly bookingService = inject(BookingService);
   private readonly freeOrders$: Observable<Orders>;
   constructor() {
     this.freeOrders$ = this.bookingService.getFreeOrders();
-    this.freeOrders$.subscribe((e) => (this.availableOrders = e));
-    this.bookingService.addFreeOrders({
-      orders: [
-        {
-          time: '2012-04-21T18:00',
-          client: 'Drew',
-          mentor: 'Stan',
-          subject: 'English',
-          price: 123,
-        },
-        {
-          time: '2012-04-21T19',
-          client: 'Drew',
-          mentor: 'Stan',
-          subject: 'English',
-          price: 226,
-        },
-      ],
+    this.freeOrders$.subscribe((e) => {
+      this.availableOrders = e;
     });
   }
   submitBooking(element: Order) {
@@ -62,7 +44,7 @@ export class AvailableComponent {
       .afterClosed()
       .subscribe((res: boolean) => {
         if (!res) return;
-        this.bookingService.addFreeOrders({ orders: [element] });
+        this.bookingService.addFreeOrders(element);
       });
   }
 }

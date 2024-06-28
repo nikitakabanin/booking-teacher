@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Orders, Order } from '../models';
 import { BehaviorSubject } from 'rxjs';
+import { HttpService } from '../http.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,25 +9,25 @@ import { BehaviorSubject } from 'rxjs';
 export class BookingService {
   private freeOrders = new BehaviorSubject<Orders>({ orders: [] });
   private bookedByClientOrders = new BehaviorSubject<Orders>({ orders: [] });
+  private readonly http = inject(HttpService);
   constructor() {}
   getFreeOrders() {
-    return this.freeOrders.asObservable();
+    return this.http.available();
   }
   getBookedOrders() {
-    return this.bookedByClientOrders.asObservable();
+    return this.http.booked();
   }
-  addFreeOrders(value: Orders) {
-    const initial = this.freeOrders.value;
-    initial.orders = [...new Set([...initial.orders, ...value.orders])];
-    this.freeOrders.next(initial);
+  addFreeOrders(value: Order) {
+    // const initial = this.freeOrders.value;
+    // initial.orders = [...new Set([...initial.orders, ...value.orders])];
+    // this.freeOrders.next(initial);
+    return this.http.add(value);
   }
-  deleteFreeOrder(value: Order) {
-    const initial = this.freeOrders.value;
-    initial.orders.filter(
-      (e) => e.time !== value.time || e.mentor !== value.mentor
-    );
-    initial.orders = [...new Set([...initial.orders, value])];
-    this.freeOrders.next(initial);
+  deleteFreeOrder(order: Order) {
+    return this.http.deleteAvailableOrder(order);
+  }
+  deleteBookedOrder(order: Order) {
+    return this.http.deleteBookedOrder(order);
   }
   addBookedOrders(value: Orders) {
     const initial = this.bookedByClientOrders.value;

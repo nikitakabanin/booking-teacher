@@ -39,24 +39,6 @@ export class AddComponent {
   constructor() {
     this.freeOrders$ = this.bookingService.getFreeOrders();
     this.freeOrders$.subscribe((e) => (this.availableOrders = e));
-    this.bookingService.addFreeOrders({
-      orders: [
-        {
-          time: '2012-04-21T18:00',
-          client: 'Drew',
-          mentor: 'Stan',
-          subject: 'English',
-          price: 123,
-        },
-        {
-          time: '2012-04-21T19',
-          client: 'Drew',
-          mentor: 'Stan',
-          subject: 'English',
-          price: 226,
-        },
-      ],
-    });
   }
   submitBooking(element: Order) {
     this.dialog
@@ -64,7 +46,7 @@ export class AddComponent {
       .afterClosed()
       .subscribe((res: boolean) => {
         if (!res) return;
-        this.bookingService.addFreeOrders({ orders: [element] });
+        this.bookingService.addFreeOrders(element);
       });
   }
   add() {
