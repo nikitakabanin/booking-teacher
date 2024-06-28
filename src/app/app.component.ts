@@ -4,6 +4,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpService } from './http.service';
+import { AuthService } from './auth/auth-utils/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,6 +20,7 @@ import { HttpService } from './http.service';
 })
 export class AppComponent {
   private readonly http = inject(HttpService);
+  readonly auth = inject(AuthService);
   title = 'booking-teacher';
   mock() {
     this.http.available().subscribe((v) => console.log(v));
@@ -36,5 +38,8 @@ export class AppComponent {
   }
   booked() {
     this.http.booked().subscribe((v) => console.log(v));
+  }
+  logout() {
+    this.auth.getUser() && this.auth.logout();
   }
 }

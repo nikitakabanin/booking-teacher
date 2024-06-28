@@ -1,8 +1,11 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a (click)="booked()">Авторизация</a>
-    <a (click)="mock()">Доступное</a>
-    <a (click)="book()">Забронированное</a></mat-toolbar-row
+    <a [routerLink]="'/auth'" (click)="logout()">{{
+      !!auth.getUser() ? "Выйти" : "Авторизация"
+    }}</a>
+    <a [routerLink]="'/available'">Доступное</a>
+    <a [routerLink]="'/booked'">Забронированное</a>
+    <a [routerLink]="'/add'">Добавить</a></mat-toolbar-row
   ></mat-toolbar
 >
 <router-outlet></router-outlet>

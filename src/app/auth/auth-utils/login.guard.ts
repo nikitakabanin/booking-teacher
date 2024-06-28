@@ -1,4 +1,4 @@
-import { CanDeactivateFn } from '@angular/router';
+import { CanDeactivateFn, Router } from '@angular/router';
 import { AuthPageComponent } from '../auth-page/auth-page.component';
 import { Observable, map, of } from 'rxjs';
 import { inject } from '@angular/core';
@@ -11,5 +11,7 @@ export const loginGuard: CanDeactivateFn<AuthPageComponent> = (
   nextState
 ): Observable<boolean> => {
   const auth = inject(AuthService);
-  return auth.getUser().pipe(map((value) => value?.response || true));
+  const router = inject(Router);
+  !!auth.getUser() || router.navigateByUrl('/auth');
+  return auth.getUser$().pipe(map((v) => !!v));
 };

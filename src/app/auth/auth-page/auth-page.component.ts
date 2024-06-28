@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UserLogin } from '../../models';
+import { UserLoginReq, UserRegReq } from '../../models';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { NgIf } from '@angular/common';
@@ -26,21 +26,21 @@ import { AuthService } from '../auth-utils/auth.service';
 })
 export class AuthPageComponent {
   private readonly authService = inject(AuthService);
-  userResponse = this.authService.getUser();
-  public user: UserLogin = { login: '', password: '' };
+  userResponse = this.authService.getUser$();
+  public userLoginData: UserLoginReq = { login: '', password: '' };
+  public userRegData: UserRegReq = { login: '', name: '', password: '' };
+
   public loginStatus: 'login' | 'registration' = 'login';
   constructor(private router: Router) {
     this.userResponse.subscribe((v) =>
-      v?.response === true
-        ? router.navigateByUrl('/booked')
-        : console.log('auth again')
+      v ? router.navigateByUrl('/booked') : console.log('auth again')
     );
   }
   public tryAuth() {
     if (this.loginStatus === 'login') {
-      this.authService.login(this.user);
+      this.authService.login(this.userLoginData);
     } else {
-      this.authService.register(this.user);
+      this.authService.register(this.userRegData);
     }
   }
 }

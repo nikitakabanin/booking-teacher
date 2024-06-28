@@ -1,12 +1,17 @@
-export interface UserLogin {
+export interface UserLoginReq {
   login: string;
   password: string;
 }
-export interface LoginResponse {
-  response: boolean;
+export interface UserLoginRes {
   jwt: string;
-  status: string;
+  role: string;
   name: string;
+  login: string;
+}
+export interface UserRegReq {
+  name: string;
+  login: string;
+  password: string;
 }
 export interface Order {
   time: string;
